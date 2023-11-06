@@ -61,7 +61,7 @@ def descarga():
         except:
             df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)
         nombreArchivo = url
-        df["Archivo"] = nombreArchivo
+        df["Archivo"] = nombreArchivo.replace(base,"").replace(".csv","")
         #print(df.shape)
         salida.append(df.copy())
     return salida
@@ -73,6 +73,7 @@ def consolidar():
     for df in lista:
         acumulador = []
         diccionario = {}
+        diccionario["Archivo"] = df..iloc[0]["Archivo"]
         diccionario["Institucion"] = "No Institucion"
         diccionario["Última Actualización"] = ""
         for mes in ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]:
