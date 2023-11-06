@@ -54,14 +54,14 @@ def descarga():
                 TA_Otras_compras                        ,
                 TA_Otras_autoridades                    ,
                 TA_Nomina_beneficiarios                 ,
-                TA_Licitaciones][:2]:
+                TA_Licitaciones][:9]:
         
         try:
             df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas)
         except:
             df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)
         nombreArchivo = url.replace(base,"").replace(".csv","")
-        print("nombre1",nombreArchivo)
+        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
         salida.append(df.copy())
@@ -75,7 +75,7 @@ def consolidar():
         acumulador = []
         diccionario = {}
         diccionario["Archivo"] = df.iloc[0]["Archivo"]
-        print("nombre2",diccionario["Archivo"])
+        
         diccionario["Institucion"] = "No Institucion"
         diccionario["Última Actualización"] = ""
         for mes in ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]:
@@ -87,6 +87,7 @@ def consolidar():
         acumulador.append(diccionario.copy())
         for institucion in df['organismo_nombre'].unique(): 
             diccionario = {}
+            diccionario["Archivo"] = df.iloc[0]["Archivo"]
             dfIntitucion = df[df['organismo_nombre'] == institucion]
             try:
                 diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
