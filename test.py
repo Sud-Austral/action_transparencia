@@ -46,6 +46,8 @@ def descarga():
                 TA_Nomina_beneficiarios                 ,
                 TA_Licitaciones]:
         print(url)
+        df = getDF(url)
+        print(df.shape)
 
 
 if __name__ == '__main__':
