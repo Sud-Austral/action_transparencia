@@ -73,7 +73,7 @@ def consolidar():
     for df in lista:
         acumulador = []
         diccionario = {}
-        diccionario["Archivo"] = df..iloc[0]["Archivo"]
+        diccionario["Archivo"] = df.iloc[0]["Archivo"]
         diccionario["Institucion"] = "No Institucion"
         diccionario["Última Actualización"] = ""
         for mes in ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]:
