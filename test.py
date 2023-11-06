@@ -54,14 +54,11 @@ def descarga():
                 TA_Otras_compras                        ,
                 TA_Otras_autoridades                    ,
                 TA_Nomina_beneficiarios                 ,
-                TA_Licitaciones][:9]:
+                TA_Licitaciones][:12]:
         
-        try:
-            df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas)
-        except:
-            df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)
-        nombreArchivo = url.replace(base,"").replace(".csv","")
         
+        df = pd.read_csv(url, sep=";", encoding="latin")        
+        nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
         salida.append(df.copy())
