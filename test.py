@@ -3,6 +3,12 @@ from datetime import datetime
 
 date_format = "%Y/%m/%d"
 
+columnas_deseadas = ['organismo_nombre', 'organismo_codigo', 'fecha_publicacion_ta', 'anyo',
+       'Mes']
+
+columnas_deseadas2 = ['organismo_nombre', 'organismo_codigo', 'fecha_publicacion', 'anyo',
+       'Mes']
+
 base = "https://www.cplt.cl/transparencia_activa/datoabierto/archivos/"
 TA_PasivosMunicipio                     = f"{base}TA_PasivosMunicipio.csv"
 TA_ActosDocPublicadosenDO               = f"{base}TA_ActosDocPublicadosenDO.csv"
@@ -49,8 +55,13 @@ def descarga():
                 TA_Otras_autoridades                    ,
                 TA_Nomina_beneficiarios                 ,
                 TA_Licitaciones][:2]:
-        print(url)
-        df = getDF(url)
+        
+        try:
+            df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas)
+        except:
+            df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)
+        nombreArchivo = url
+        df["Archivo"] = nombreArchivo
         #print(df.shape)
         salida.append(df.copy())
     return salida
