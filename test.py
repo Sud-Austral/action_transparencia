@@ -48,11 +48,12 @@ def descarga():
                 TA_Otras_compras                        ,
                 TA_Otras_autoridades                    ,
                 TA_Nomina_beneficiarios                 ,
-                TA_Licitaciones]:
+                TA_Licitaciones][:2]:
         print(url)
         df = getDF(url)
         #print(df.shape)
         salida.append(df.copy())
+    return salida
 
 def consolidar():
     lista = descarga()
