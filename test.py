@@ -44,7 +44,7 @@ def descarga():
                 TA_Otras_compras                        ,
                 TA_Otras_autoridades                    ,
                 TA_Nomina_beneficiarios                 ,
-                TA_Licitaciones]
+                TA_Licitaciones]:
         print(url)
 
 
