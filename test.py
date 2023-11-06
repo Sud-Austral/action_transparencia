@@ -47,14 +47,15 @@ def descarga():
                 TA_Auditorias                           ,
                 TA_Subsidios_beneficios_intermediarios  ,
                 TA_Subsidios_beneficios                 ,
-                TA_PersonalPlanta                       ,
-                TA_PersonalContrata                     ,
-                TA_PersonalCodigotrabajo                ,
-                TA_PersonalContratohonorarios           ,
-                TA_Otras_compras                        ,
-                TA_Otras_autoridades                    ,
-                TA_Nomina_beneficiarios                 ,
-                TA_Licitaciones][:12]:
+                #TA_PersonalPlanta                       ,
+                #TA_PersonalContrata                     ,
+                #TA_PersonalCodigotrabajo                ,
+                #TA_PersonalContratohonorarios           ,
+                #TA_Otras_compras                        ,
+                #TA_Otras_autoridades                    ,
+                #TA_Nomina_beneficiarios                 ,
+                #TA_Licitaciones
+                ]:
         
         
         df = pd.read_csv(url, sep=";", encoding="latin")        
