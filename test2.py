@@ -60,7 +60,8 @@ parte2 = [TA_PersonalPlanta]
 def descarga():
     salida = []
     for url in parte2:       
-        df = pd.read_csv(url, sep=";", encoding="latin")        
+        #df = pd.read_csv(url, sep=";", encoding="latin")     
+        df = pd.read_csv(TA_PasivosMunicipio, sep=";", encoding="latin", usecols=columnas_deseadas)   
         nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
@@ -110,7 +111,7 @@ def consolidar():
         salida2["Fecha"] = salida2["Última Actualización"].apply(lambda x:datetime.strptime(x, date_format))
         consolidador.append(salida2.copy())
     final = pd.concat(consolidador)
-    final.to_excel("consolidado.xlsx", index=False)
+    final.to_excel("consolidado2.xlsx", index=False)
 
 
 if __name__ == '__main__':
