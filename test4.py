@@ -56,13 +56,7 @@ parte1 = [TA_PasivosMunicipio                      ,
                 ]
 parte2 = [TA_PersonalPlanta]
 parte3 = [TA_PersonalContrata]
-parte4 = [TA_PersonalCodigotrabajo                ,
-            TA_PersonalContratohonorarios           ,
-            TA_Otras_compras                        ,
-            TA_Otras_autoridades                    ,
-            TA_Nomina_beneficiarios                 ,
-            TA_Licitaciones
-            ]
+parte4 = [TA_PersonalCodigotrabajo]
 
 
 def descarga():
