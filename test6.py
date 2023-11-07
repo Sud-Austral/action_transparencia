@@ -71,8 +71,8 @@ parte6 = [TA_PersonalContratohonorarios]
 def descarga():
     salida = []
     for url in parte6:       
-        df = pd.read_csv(url, sep=";", encoding="latin")     
-        #df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)   
+        #df = pd.read_csv(url, sep=";", encoding="latin")     
+        df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)   
         nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
