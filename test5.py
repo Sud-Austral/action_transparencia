@@ -61,7 +61,7 @@ parte5 = [
                 #TA_PersonalContratohonorarios           ,
                 #TA_Otras_compras                        ,
                 #TA_Otras_autoridades                    ,
-                TA_Nomina_beneficiarios                 ,
+                #TA_Nomina_beneficiarios                 ,
                 TA_Licitaciones
                 ]
 
@@ -69,7 +69,7 @@ parte5 = [
 def descarga():
     salida = []
     for url in parte5:       
-        df = pd.read_csv(url, sep=";", encoding="latin")     
+        #df = pd.read_csv(url, sep=";", encoding="latin")     
         #df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)   
         nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
