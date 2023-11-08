@@ -61,7 +61,7 @@ parte5 = [
                 #TA_PersonalContratohonorarios           ,
                 #TA_Otras_compras                        ,
                 #TA_Otras_autoridades                    ,
-                #TA_Nomina_beneficiarios                 ,
+                TA_Nomina_beneficiarios                 ,
                 TA_Licitaciones
                 ]
 
