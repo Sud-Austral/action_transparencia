@@ -12,5 +12,5 @@ if __name__ == '__main__':
             'consolidado7.xlsx']
     salida = []
     for name in lista:
-        salida.append(pd.read_excel(i).copy())
+        salida.append(pd.read_excel(name).copy())
     pd.concat(salida).to_excel("Consolidado_final.xlsx", index=False)
