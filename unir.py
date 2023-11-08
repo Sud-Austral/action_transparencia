@@ -3,7 +3,13 @@ import pandas as pd
 
 
 if __name__ == '__main__':
-    lista = ["consolidado.xlsx"] + [f"consolidado{i}.xlsx" for i in range(2,8)]
+    lista = ['consolidado.xlsx',
+            'consolidado2.xlsx',
+            'consolidado3.xlsx',
+            'consolidado4.xlsx',
+            'consolidado5.xlsx',
+            'consolidado6.xlsx',
+            'consolidado7.xlsx']
     salida = []
     for name in lista:
         salida.append(pd.read_excel(i).copy())
