@@ -5,8 +5,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  #schedule:
-  #  - cron:  '0 0 * * 6'
+  schedule:
+    - cron:  '0 12 * * 6'
   #  At 00:00 on Saturday
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         echo "Vamos a lo importante... 1"
-        python test3.py
+        python test7.py
 
     - uses: stefanzweifel/git-auto-commit-action@v2
       with:

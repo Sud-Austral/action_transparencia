@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron:  '0 0 * * 6'
+    - cron:  '0 10 * * 6'
   #  At 00:00 on Saturday
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         echo "Vamos a lo importante... 1"
-        python test.py
+        python test6.py
 
     - uses: stefanzweifel/git-auto-commit-action@v2
       with:
