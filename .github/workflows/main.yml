@@ -3,8 +3,8 @@ name: Descarga
 on:
 
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   schedule:
     - cron:  '0 0 * * 6'
   #  At 00:00 on Saturday
