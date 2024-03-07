@@ -55,14 +55,25 @@ parte1 = [TA_PasivosMunicipio                      ,
                 #TA_Licitaciones
                 ]
 parte2 = [TA_PersonalPlanta]
+parte3 = [TA_PersonalContrata]
+parte4 = [TA_PersonalCodigotrabajo]
+parte5 = [
+                #TA_PersonalContratohonorarios           ,
+                #TA_Otras_compras                        ,
+                #TA_Otras_autoridades                    ,
+                TA_Nomina_beneficiarios                 ,
+                TA_Licitaciones
+                ]
 
+parte6 = [TA_PersonalContratohonorarios]
+parte7 = [TA_Otras_compras,TA_Otras_autoridades  ]
 
 
 def descarga():
     salida = []
-    for url in parte2:       
+    for url in parte7:       
         #df = pd.read_csv(url, sep=";", encoding="latin")     
-        df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas2)   
+        df = pd.read_csv(url, sep=";", encoding="latin", usecols=columnas_deseadas)   
         nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
@@ -97,24 +108,22 @@ def consolidar():
             except:
                 diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
                 #print("fecha2",diccionario["Última Actualización"])
-            for anyo in [2022,2023,2024]:
-                dfIntitucionAnyo = dfIntitucion[dfIntitucion["anyo"] == anyo]            
-                diccionario["Institucion"] = institucion
-                diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
-                diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
-                for mes in dfIntitucionAnyo["Mes"].unique():
-                    diccionario[mes] = "x"
-                diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
-                diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
-                diccionario["Total"] = len(dfIntitucion)    
-                diccionario["año_auditoria"] = anyo
-                acumulador.append(diccionario.copy())
+            dfIntitucionAnyo = dfIntitucion[dfIntitucion["anyo"] == 2023]            
+            diccionario["Institucion"] = institucion
+            diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+            diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
+            for mes in dfIntitucionAnyo["Mes"].unique():
+                diccionario[mes] = "x"
+            diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
+            diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
+            diccionario["Total"] = len(dfIntitucion)        
+            acumulador.append(diccionario.copy())
         salida = pd.DataFrame(acumulador)
         salida2 = salida[salida["Institucion"] != "No Institucion"]
         salida2["Fecha"] = salida2["Última Actualización"].apply(lambda x:datetime.strptime(x, date_format))
         consolidador.append(salida2.copy())
     final = pd.concat(consolidador)
-    final.to_excel("consolidado2.xlsx", index=False)
+    final.to_excel("consolidado7.xlsx", index=False)
 
 
 if __name__ == '__main__':

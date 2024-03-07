@@ -97,16 +97,18 @@ def consolidar():
             except:
                 diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
                 #print("fecha2",diccionario["Última Actualización"])
-            dfIntitucionAnyo = dfIntitucion[dfIntitucion["anyo"] == 2023]            
-            diccionario["Institucion"] = institucion
-            diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
-            diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
-            for mes in dfIntitucionAnyo["Mes"].unique():
-                diccionario[mes] = "x"
-            diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
-            diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
-            diccionario["Total"] = len(dfIntitucion)        
-            acumulador.append(diccionario.copy())
+            for anyo in [2022,2023,2024]:
+                dfIntitucionAnyo = dfIntitucion[dfIntitucion["anyo"] == anyo]            
+                diccionario["Institucion"] = institucion
+                diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+                diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
+                for mes in dfIntitucionAnyo["Mes"].unique():
+                    diccionario[mes] = "x"
+                diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
+                diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
+                diccionario["Total"] = len(dfIntitucion)    
+                diccionario["año_auditoria"] = anyo
+                acumulador.append(diccionario.copy())
         salida = pd.DataFrame(acumulador)
         salida2 = salida[salida["Institucion"] != "No Institucion"]
         salida2["Fecha"] = salida2["Última Actualización"].apply(lambda x:datetime.strptime(x, date_format))
