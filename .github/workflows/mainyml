@@ -30,22 +30,22 @@ jobs:
         python test.py
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 2"
-        python test2.py
+        echo "python test2.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 3"
-        python test3.py
+        echo "python test3.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 4"
-        python test4.py
+        echo "python test4.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 5"
-        python test5.py
+        echo "python test5.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 6"
-        python test6.py
+        echo "python test6.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... 7"
-        python test7.py
+        echo "python test7.py"
         sudo sync && sudo echo 3 > /proc/sys/vm/drop_caches
         echo "Vamos a lo importante... unir"
         python unir.py
