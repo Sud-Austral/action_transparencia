@@ -98,22 +98,23 @@ def consolidar():
         diccionario["Sin Año"] = 0
         diccionario["Total"] = 0
         acumulador.append(diccionario.copy())
-        for institucion in df['organismo_nombre'].unique(): 
-            diccionario = {}
-            diccionario["Archivo"] = df.iloc[0]["Archivo"]
-            dfIntitucion = df[df['organismo_nombre'] == institucion]
-            try:
-                diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
-                #print("fecha1",diccionario["Última Actualización"])
-            except:
-                diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
-                #print("fecha2",diccionario["Última Actualización"])
-            for anyo in [2022,2023,2024]:
-                dfIntitucionAnyo = dfIntitucion[dfIntitucion["anyo"] == anyo]            
+        for anyo in [2022,2023,2024]:
+            df2 = df[df["anyo"] == anyo]
+            for institucion in df2['organismo_nombre'].unique()[:5]: 
+                dfIntitucion = df2[df2['organismo_nombre'] == institucion]
+                diccionario = {}
+                diccionario["Archivo"] = df.iloc[0]["Archivo"]
+                try:
+                    diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
+                    #print("fecha1",diccionario["Última Actualización"])
+                except:
+                    diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
+                    #print("fecha2",diccionario["Última Actualización"])   
+                print(anyo,institucion,diccionario["Última Actualización"])
                 diccionario["Institucion"] = institucion
                 diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
                 diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
-                for mes in dfIntitucionAnyo["Mes"].unique():
+                for mes in dfIntitucion["Mes"].unique():
                     diccionario[mes] = "x"
                 diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
                 diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
