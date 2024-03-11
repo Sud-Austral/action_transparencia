@@ -13,4 +13,9 @@ if __name__ == '__main__':
     salida = []
     for name in lista:
         salida.append(pd.read_excel(name).copy())
-    pd.concat(salida).to_excel("Consolidado_final.xlsx", index=False)
+    dfSalida = pd.concat(salida)
+    dfSalida2 = dfSalida[['Archivo', 'Institucion', 'Última Actualización', 'Enero', 'Febrero',
+       'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
+       'Octubre', 'Noviembre', 'Diciembre', 'Sin Año-Mes', 'Sin Mes',
+       'Sin Año', 'Total', 'Codigo', 'año_auditoria', 'Fecha']]
+    dfSalida2.to_excel("Consolidado_final.xlsx", index=False)

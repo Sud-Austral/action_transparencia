@@ -26,8 +26,7 @@ jobs:
         echo "Actions Publicadas, Cerradas"
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "Vamos a lo importante... 1"
-        python test.py
+        echo "Vamos a lo importante... 1"        
         python unir.py
 
     - uses: stefanzweifel/git-auto-commit-action@v2
