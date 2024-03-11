@@ -18,4 +18,4 @@ if __name__ == '__main__':
        'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
        'Octubre', 'Noviembre', 'Diciembre', 'Sin Año-Mes', 'Sin Mes',
        'Sin Año', 'Total', 'Codigo', 'año_auditoria', 'Fecha']]
-    dfSalida2.to_excel("Consolidado_final.xlsx", index=False)
+    dfSalida.to_excel("Consolidado_final.xlsx", index=False)
