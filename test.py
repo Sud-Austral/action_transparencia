@@ -87,7 +87,7 @@ def consolidar():
         acumulador.append(diccionario.copy())
         for anyo in [2022,2023,2024]:
             df2 = df[df["anyo"] == anyo]
-            for institucion in df2['organismo_nombre'].unique()[:5]: 
+            for institucion in df2['organismo_nombre'].unique(): 
                 dfIntitucion = df2[df2['organismo_nombre'] == institucion]
                 diccionario = {}
                 diccionario["Archivo"] = df.iloc[0]["Archivo"]
