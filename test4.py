@@ -70,6 +70,13 @@ def descarga():
         salida.append(df.copy())
     return salida
 
+
+def getFecha(fecha):
+    try:
+        return datetime.strptime(fecha, date_format)
+    except:
+        return None
+        
 def consolidar():
     lista = descarga()
 
@@ -113,7 +120,8 @@ def consolidar():
                 acumulador.append(diccionario.copy())
         salida = pd.DataFrame(acumulador)
         salida2 = salida[salida["Institucion"] != "No Institucion"]
-        salida2["Fecha"] = salida2["Última Actualización"].apply(lambda x:datetime.strptime(x, date_format))
+        #salida2["Fecha"] = salida2["Última Actualización"].apply(lambda x:datetime.strptime(x, date_format))
+        salida2["Fecha"] = salida2["Última Actualización"].apply(getFecha)
         consolidador.append(salida2.copy())
     final = pd.concat(consolidador)
     final.to_excel("consolidado4.xlsx", index=False)
