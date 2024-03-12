@@ -75,8 +75,7 @@ def consolidar():
     for df in lista:
         acumulador = []
         diccionario = {}
-        diccionario["Archivo"] = df.iloc[0]["Archivo"]
-        
+        diccionario["Archivo"] = df.iloc[0]["Archivo"]        
         diccionario["Institucion"] = "No Institucion"
         diccionario["Última Actualización"] = ""
         for mes in ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]:
@@ -86,19 +85,18 @@ def consolidar():
         diccionario["Sin Año"] = 0
         diccionario["Total"] = 0
         acumulador.append(diccionario.copy())
+        lista_organismo = list(df2['organismo_nombre'].unique())
         for anyo in [2022,2023,2024]:
             df2 = df[df["anyo"] == anyo]
-            for institucion in df2['organismo_nombre'].unique(): 
+            #for institucion in df2['organismo_nombre'].unique():
+            for institucion in lista_organismo: 
                 dfIntitucion = df2[df2['organismo_nombre'] == institucion]
                 diccionario = {}
                 diccionario["Archivo"] = df.iloc[0]["Archivo"]
                 try:
                     diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
-                    #print("fecha1",diccionario["Última Actualización"])
                 except:
                     diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
-                    #print("fecha2",diccionario["Última Actualización"])   
-                print(anyo,institucion,diccionario["Última Actualización"])
                 diccionario["Institucion"] = institucion
                 diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
                 diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
