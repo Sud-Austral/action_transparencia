@@ -59,11 +59,12 @@ parte2 = [TA_PersonalPlanta]
 
 def descarga():
     salida = []
-    for url in parte1:       
+    for url in parte1:              
         df = pd.read_csv(url, sep=";", encoding="latin")        
         nombreArchivo = url.replace(base,"").replace(".csv","")        
         df["Archivo"] = nombreArchivo
         #print(df.shape)
+        print(url,len(df))
         salida.append(df.copy())
     return salida
 
