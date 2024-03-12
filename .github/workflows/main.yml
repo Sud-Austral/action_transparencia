@@ -27,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         echo "Vamos a lo importante... 1"        
-        python test4.py
+        python test5.py
         python unir.py
 
     - uses: stefanzweifel/git-auto-commit-action@v2
