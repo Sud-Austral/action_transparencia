@@ -98,7 +98,8 @@ def consolidar():
                 except:
                     diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
                 diccionario["Institucion"] = institucion
-                diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+                #diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+                diccionario["Codigo"] = df[df['organismo_nombre'] == institucion].iloc[0]["organismo_codigo"]
                 diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
                 for mes in dfIntitucion["Mes"].unique():
                     diccionario[mes] = "x"
