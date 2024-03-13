@@ -8,11 +8,9 @@ on:
   schedule:
     - cron: '0 0 * * 6' # A las 00:00 del sábado
 
-jobs:
-  test1:
-    runs-on: ubuntu-latest
-    needs: []
-    steps:
+# Definir pasos comunes para la configuración y ejecución de los scripts
+steps_template: &steps_template
+  steps:
     - name: Checkout código
       uses: actions/checkout@v2
     - name: Cache dependencias de Python
@@ -30,121 +28,53 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "Parte 1"
+
+# Definir pasos comunes para el commit
+commit_steps: &commit_steps
+  - name: Commit cambios
+    uses: stefanzweifel/git-auto-commit-action@v2
+    with:
+      commit_message: "Actualizacion"
+      branch: main
+      repository: .
+      commit_user_name: Actions Bot
+      commit_user_email: lmonsalve22@gmail.com
+      commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
+      push_options: '--force'
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    steps:
+      <<: *steps_template
     - name: Ejecutar script test1
-      run: python test.py
-    - name: Commit cambios
-      uses: stefanzweifel/git-auto-commit-action@v2
-      with:
-        commit_message: "Actualizacion"
-        branch: main
-        repository: .
-        commit_user_name: Actions Bot
-        commit_user_email: lmonsalve22@gmail.com
-        commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-        push_options: '--force'
+      run: python test1.py
+    - <<: *commit_steps
 
   test2:
     runs-on: ubuntu-latest
     needs: [test1]
     steps:
-    - name: Checkout código
-      uses: actions/checkout@v2
-    - name: Cache dependencias de Python
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Configurar Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
-    - name: Instalar dependencias
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        echo "Parte 2"
+      <<: *steps_template
     - name: Ejecutar script test2
       run: python test2.py
-    - name: Commit cambios
-      uses: stefanzweifel/git-auto-commit-action@v2
-      with:
-        commit_message: "Actualizacion"
-        branch: main
-        repository: .
-        commit_user_name: Actions Bot
-        commit_user_email: lmonsalve22@gmail.com
-        commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-        push_options: '--force'
+    - <<: *commit_steps
 
   test3:
     runs-on: ubuntu-latest
     needs: [test2]
     steps:
-    - name: Checkout código
-      uses: actions/checkout@v2
-    - name: Cache dependencias de Python
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Configurar Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
-    - name: Instalar dependencias
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        echo "Parte 3"
+      <<: *steps_template
     - name: Ejecutar script test3
       run: python test3.py
-    - name: Commit cambios
-      uses: stefanzweifel/git-auto-commit-action@v2
-      with:
-        commit_message: "Actualizacion"
-        branch: main
-        repository: .
-        commit_user_name: Actions Bot
-        commit_user_email: lmonsalve22@gmail.com
-        commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-        push_options: '--force'
+    - <<: *commit_steps
 
   test4:
     runs-on: ubuntu-latest
     needs: [test3]
     steps:
-    - name: Checkout código
-      uses: actions/checkout@v2
-    - name: Cache dependencias de Python
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Configurar Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
-    - name: Instalar dependencias
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        echo "Parte 4"
+      <<: *steps_template
     - name: Ejecutar script test4
       run: python test4.py
-    - name: Commit cambios
-      uses: stefanzweifel/git-auto-commit-action@v2
-      with:
-        commit_message: "Actualizacion"
-        branch: main
-        repository: .
-        commit_user_name: Actions Bot
-        commit_user_email: lmonsalve22@gmail.com
-        commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-        push_options: '--force'
+    - <<: *commit_steps
+
