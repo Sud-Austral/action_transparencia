@@ -80,6 +80,7 @@ def consolidar():
     lista = descarga()
 
     consolidador = []
+    consolidador_historico = []
     for df in lista:
         acumulador = []
         diccionario = {}
