@@ -32,7 +32,7 @@ jobs:
         pip install -r requirements.txt
         echo "Parte 1"
     - name: Ejecutar script test1
-      run: python test1.py
+      run: python test.py
     - name: Commit cambios
       uses: stefanzweifel/git-auto-commit-action@v2
       with:
