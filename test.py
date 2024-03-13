@@ -106,9 +106,12 @@ def consolidar():
                 diccionario["Institucion"] = institucion
                 #diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
                 diccionario["Codigo"] = df[df['organismo_nombre'] == institucion].iloc[0]["organismo_codigo"]
+                
                 diccionario["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
+                
                 for mes in dfIntitucion["Mes"].unique():
                     diccionario[mes] = "x"
+                
                 diccionario["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
                 diccionario["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
                 diccionario["Total"] = len(dfIntitucion)    
