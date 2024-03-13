@@ -78,10 +78,11 @@ def consolidar():
     lista = descarga()
 
     consolidador = []
+    consolidador_historico = []
     for df in lista:
         acumulador = []
         diccionario = {}
-        diccionario["Archivo"] = df.iloc[0]["Archivo"]        
+        diccionario["Archivo"] = df.iloc[0]["Archivo"]
         diccionario["Institucion"] = "No Institucion"
         diccionario["Última Actualización"] = ""
         for mes in ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]:
@@ -91,7 +92,26 @@ def consolidar():
         diccionario["Sin Año"] = 0
         diccionario["Total"] = 0
         acumulador.append(diccionario.copy())
+
+        acumulador_historico = []
         lista_organismo = list(df['organismo_nombre'].unique())
+        for institucion in lista_organismo:
+            diccionario_historico = {}
+            dfIntitucion = df[df['organismo_nombre'] == institucion]
+            diccionario_historico["Archivo"] = df.iloc[0]["Archivo"]
+            try:
+                diccionario_historico["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
+            except:
+                diccionario_historico["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
+            diccionario_historico["Institucion"] = institucion
+            diccionario_historico["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+            diccionario_historico ["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
+            diccionario_historico ["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
+            diccionario_historico ["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
+            diccionario_historico ["Total"] = len(dfIntitucion)
+            acumulador_historico.append(diccionario.copy())
+        salida_historico = pd.DataFrame(acumulador_historico)
+
         for anyo in [2022,2023,2024]:
             df2 = df[df["anyo"] == anyo]
             #for institucion in df2['organismo_nombre'].unique():
@@ -124,6 +144,8 @@ def consolidar():
         consolidador.append(salida2.copy())
     final = pd.concat(consolidador)   
     final.to_excel("consolidado.xlsx", index=False)
+
+    pd.concat(salida_historico).to_excel("consolidado_historico.xlsx", index=False)
 
 
 if __name__ == '__main__':
