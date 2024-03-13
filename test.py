@@ -36,15 +36,15 @@ def getDF(url):
 
 parte1 = [TA_PasivosMunicipio                      ,
                 TA_ActosDocPublicadosenDO               ,
-                TA_Potestades_otras                     ,
-                TA_Marco_normativo                      ,
-                TA_Facultades_funciones_atribuciones    ,
-                TA_Otras_transferencias                 ,
-                TA_Tramites_ante_consejo                ,
-                TA_ParticipacionCiudadana               ,
-                TA_Auditorias                           ,
-                TA_Subsidios_beneficios_intermediarios  ,
-                TA_Subsidios_beneficios                 ,
+                #TA_Potestades_otras                     ,
+                #TA_Marco_normativo                      ,
+                #TA_Facultades_funciones_atribuciones    ,
+                #TA_Otras_transferencias                 ,
+                #TA_Tramites_ante_consejo                ,
+                #TA_ParticipacionCiudadana               ,
+                #TA_Auditorias                           ,
+                #TA_Subsidios_beneficios_intermediarios  ,
+                #TA_Subsidios_beneficios                 ,
                 
                 #TA_PersonalPlanta                       ,
                 #TA_PersonalContrata                     ,
@@ -110,7 +110,7 @@ def consolidar():
             diccionario_historico ["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
             diccionario_historico ["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
             diccionario_historico ["Total"] = len(dfIntitucion)
-            acumulador_historico.append(diccionario.copy())
+            acumulador_historico.append(diccionario_historico.copy())
         salida_historico = pd.DataFrame(acumulador_historico)
         consolidador_historico.append(salida_historico.copy())
 
