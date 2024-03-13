@@ -19,3 +19,12 @@ if __name__ == '__main__':
        'Octubre', 'Noviembre', 'Diciembre', 'Sin Año-Mes', 'Sin Mes',
        'Sin Año', 'Total', 'Codigo', 'año_auditoria', 'Fecha']]
     dfSalida.to_excel("Consolidado_final.xlsx", index=False)
+
+
+    lista_historico = ['consolidado_historico.xlsx']
+    salida_historico = []
+    for name in lista_historico:
+        salida_historico.append(pd.read_excel(name).copy())
+    dfSalida_historico = pd.concat(salida_historico)
+    dfSalida_historico.to_excel("Consolidado_historico_final.xlsx", index=False)
+

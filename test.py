@@ -36,15 +36,16 @@ def getDF(url):
 
 parte1 = [TA_PasivosMunicipio                      ,
                 TA_ActosDocPublicadosenDO               ,
-                TA_Potestades_otras                     ,
-                TA_Marco_normativo                      ,
-                TA_Facultades_funciones_atribuciones    ,
-                TA_Otras_transferencias                 ,
-                TA_Tramites_ante_consejo                ,
-                TA_ParticipacionCiudadana               ,
-                TA_Auditorias                           ,
-                TA_Subsidios_beneficios_intermediarios  ,
-                TA_Subsidios_beneficios                 ,
+                #TA_Potestades_otras                     ,
+                #TA_Marco_normativo                      ,
+                #TA_Facultades_funciones_atribuciones    ,
+                #TA_Otras_transferencias                 ,
+                #TA_Tramites_ante_consejo                ,
+                #TA_ParticipacionCiudadana               ,
+                #TA_Auditorias                           ,
+                #TA_Subsidios_beneficios_intermediarios  ,
+                #TA_Subsidios_beneficios                 ,
+                
                 #TA_PersonalPlanta                       ,
                 #TA_PersonalContrata                     ,
                 #TA_PersonalCodigotrabajo                ,
@@ -111,6 +112,7 @@ def consolidar():
             diccionario_historico ["Total"] = len(dfIntitucion)
             acumulador_historico.append(diccionario.copy())
         salida_historico = pd.DataFrame(acumulador_historico)
+        consolidador_historico.append(salida_historico.copy())
 
         for anyo in [2022,2023,2024]:
             df2 = df[df["anyo"] == anyo]
@@ -144,8 +146,8 @@ def consolidar():
         consolidador.append(salida2.copy())
     final = pd.concat(consolidador)   
     final.to_excel("consolidado.xlsx", index=False)
-
-    pd.concat(salida_historico).to_excel("consolidado_historico.xlsx", index=False)
+    final_historico = pd.concat(consolidador_historico) 
+    final_historico.to_excel("consolidado_historico.xlsx", index=False)
 
 
 if __name__ == '__main__':
