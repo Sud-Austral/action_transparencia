@@ -21,7 +21,8 @@ if __name__ == '__main__':
     dfSalida.to_excel("Consolidado_final.xlsx", index=False)
 
 
-    lista_historico = ['consolidado_historico.xlsx']
+    lista_historico = ['consolidado_historico.xlsx',
+                        "consolidado_historico2.xlsx"]
     salida_historico = []
     for name in lista_historico:
         salida_historico.append(pd.read_excel(name).copy())
