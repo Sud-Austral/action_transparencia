@@ -81,6 +81,7 @@ def consolidar():
     lista = descarga()
 
     consolidador = []
+    consolidador_historico = []
     for df in lista:
         acumulador = []
         diccionario = {}
@@ -95,6 +96,27 @@ def consolidar():
         diccionario["Sin Año"] = 0
         diccionario["Total"] = 0
         acumulador.append(diccionario.copy())
+        acumulador_historico = []
+        lista_organismo = list(df['organismo_nombre'].unique())
+
+        for institucion in lista_organismo:
+            diccionario_historico = {}
+            dfIntitucion = df[df['organismo_nombre'] == institucion]
+            diccionario_historico["Archivo"] = df.iloc[0]["Archivo"]
+            try:
+                diccionario_historico["Última Actualización"] = dfIntitucion["fecha_publicacion_ta"].max()
+            except:
+                diccionario_historico["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
+            diccionario_historico["Institucion"] = institucion
+            diccionario_historico["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
+            diccionario_historico ["Sin Año-Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.isnull()'))
+            diccionario_historico ["Sin Mes"] = len(dfIntitucion.query('Mes.isnull() and anyo.notnull()'))
+            diccionario_historico ["Sin Año"] = len(dfIntitucion.query('Mes.notnull() and anyo.isnull()'))
+            diccionario_historico ["Total"] = len(dfIntitucion)
+            acumulador_historico.append(diccionario_historico.copy())
+        salida_historico = pd.DataFrame(acumulador_historico)
+        consolidador_historico.append(salida_historico.copy())
+
         for anyo in [2022,2023,2024]:
             df2 = df[df["anyo"] == anyo]
             for institucion in df2['organismo_nombre'].unique(): 
@@ -126,6 +148,8 @@ def consolidar():
     final = pd.concat(consolidador)
     final.to_excel("consolidado4.xlsx", index=False)
 
+    final_historico = pd.concat(consolidador_historico) 
+    final_historico.to_excel("consolidado_historico4.xlsx", index=False)
 
 if __name__ == '__main__':
     consolidar()
