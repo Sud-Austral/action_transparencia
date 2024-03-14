@@ -22,7 +22,8 @@ if __name__ == '__main__':
 
 
     lista_historico = ['consolidado_historico.xlsx',
-                        "consolidado_historico2.xlsx"]
+                        "consolidado_historico2.xlsx",
+                        "consolidado_historico3.xlsx"]
     salida_historico = []
     for name in lista_historico:
         salida_historico.append(pd.read_excel(name).copy())
