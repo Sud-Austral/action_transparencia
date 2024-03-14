@@ -130,8 +130,7 @@ def consolidar():
                     #print("fecha1",diccionario["Última Actualización"])
                 except:
                     diccionario["Última Actualización"] = dfIntitucion["fecha_publicacion"].max()
-                    #print("fecha2",diccionario["Última Actualización"])   
-                print(anyo,institucion,diccionario["Última Actualización"])
+                    #print("fecha2",diccionario["Última Actualización"])
                 diccionario["Institucion"] = institucion
                 #diccionario["Codigo"] = dfIntitucion.iloc[0]["organismo_codigo"]
                 diccionario["Codigo"] = df[df['organismo_nombre'] == institucion].iloc[0]["organismo_codigo"]
