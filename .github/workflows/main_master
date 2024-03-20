@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 6' # A las 00:00 del sábado
+    - cron: '0 0 */1 * *' # A las 00:00 del sábado
 
 jobs:
   build1:
@@ -229,6 +229,7 @@ jobs:
 
       - name: AUTOMATIZACIÓN
         run: |
+          cp /shared/* .
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           echo "Vamos a lo importante...1"    
