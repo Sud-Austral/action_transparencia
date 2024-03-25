@@ -112,6 +112,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           echo "Vamos a lo importante...1" 
+          python test4.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
